@@ -1,0 +1,27 @@
+{
+  "connection": "default",
+  "collectionName": "students",
+  "info": {
+    "name": "student",
+    "description": "Table of Student"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "type": "string"
+    },
+    "rollnumber": {
+      "default": "",
+      "type": "string"
+    },
+    "sid": {
+      "default": "",
+      "type": "integer"
+    }
+  }
+}
