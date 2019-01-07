@@ -1,0 +1,25 @@
+{
+  "connection": "default",
+  "collectionName": "studentfiles",
+  "info": {
+    "name": "studentfiles",
+    "description": "File Upload"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "type": "string"
+    },
+    "fileDetails": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/studentfiles",
+      "handler": "Studentfiles.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/studentfiles/count",
+      "handler": "Studentfiles.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/studentfiles/:id",
+      "handler": "Studentfiles.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/studentfiles",
+      "handler": "Studentfiles.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/studentfiles/:id",
+      "handler": "Studentfiles.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/studentfiles/:id",
+      "handler": "Studentfiles.destroy",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/studentfiles/:id/relationships/:relation",
+      "handler": "Studentfiles.createRelation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/studentfiles/:id/relationships/:relation",
+      "handler": "Studentfiles.updateRelation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/studentfiles/:id/relationships/:relation",
+      "handler": "Studentfiles.destroyRelation",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
