@@ -1,0 +1,47 @@
+{
+  "connection": "default",
+  "collectionName": "dropdown_master",
+  "info": {
+    "name": "dropdownlist",
+    "description": ""
+  },
+  "options": {
+    "increments": false,
+    "timestamps": false,
+    "comment": ""
+  },
+  "attributes": {
+    "Register Name": {
+      "default": "register",
+      "type": "enumeration",
+      "enum": [
+        "Malta National Cancer Registry",
+        " Rare Diseases Register",
+        " Dementia Register",
+        " Malta National Mortality Register",
+        " National Organ Transplant Registry",
+        " National Hospital Information Systems",
+        " Malta Congenital Anomalies Register",
+        " National Obstetric Information System Registry",
+        " Accident and Injury Database",
+        " Cerebral Palsy (CP) Register",
+        " Diabetes "
+      ]
+    },
+    "Field Name": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "FieldCode": {
+      "default": "",
+      "type": "integer",
+      "required": true
+    },
+    "Field Label": {
+      "default": "",
+      "type": "string",
+      "required": true
+    }
+  }
+}

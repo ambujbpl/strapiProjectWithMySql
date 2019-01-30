@@ -6,8 +6,8 @@
     "description": "File Upload"
   },
   "options": {
-    "increments": true,
-    "timestamps": true,
+    "increments": false,
+    "timestamps": false,
     "comment": ""
   },
   "attributes": {

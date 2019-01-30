@@ -1,0 +1,76 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/dropdownlists",
+      "handler": "Dropdownlist.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/dropdownlists/count",
+      "handler": "Dropdownlist.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/dropdownlists/:id",
+      "handler": "Dropdownlist.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/dropdownlists",
+      "handler": "Dropdownlist.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/dropdownlists/:id",
+      "handler": "Dropdownlist.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/dropdownlists/:id",
+      "handler": "Dropdownlist.destroy",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/dropdownlists/:id/relationships/:relation",
+      "handler": "Dropdownlist.createRelation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/dropdownlists/:id/relationships/:relation",
+      "handler": "Dropdownlist.updateRelation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/dropdownlists/:id/relationships/:relation",
+      "handler": "Dropdownlist.destroyRelation",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

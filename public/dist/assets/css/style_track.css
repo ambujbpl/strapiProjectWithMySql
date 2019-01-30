@@ -1,0 +1,155 @@
+.centerAlignDiv ol.progtrckr {
+    margin: 0px auto !important;
+    padding: 0px !important;
+    text-align: center;
+}
+
+ol.progtrckr {
+    /*margin: 0;*/
+    /*padding: 0;*/
+    width: 100%;
+    list-style-type none;
+}
+
+ol.progtrckr li {
+    display: inline-block;
+    text-align: center;
+    line-height: 3.5em;
+}
+
+ol.progtrckr[data-progtrckr-steps="2"] li { width: 49%; }
+ol.progtrckr[data-progtrckr-steps="3"] li { width: 33%; }
+ol.progtrckr[data-progtrckr-steps="4"] li { width: 24%; }
+ol.progtrckr[data-progtrckr-steps="5"] li { width: 19%; }
+ol.progtrckr[data-progtrckr-steps="6"] li { width: 16%; }
+ol.progtrckr[data-progtrckr-steps="7"] li { width: 14%; }
+ol.progtrckr[data-progtrckr-steps="8"] li { width: 12%; }
+ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
+
+ol.progtrckr li.progtrckr-done {
+    color: black;
+    border-bottom: 4px solid yellowgreen;
+}
+ol.progtrckr li.progtrckr-todo {
+    color: silver; 
+    border-bottom: 4px solid silver;
+}
+
+ol.progtrckr li:after {
+    content: "\00a0\00a0";
+}
+ol.progtrckr li:before {
+    position: relative;
+    bottom: -2.5em;
+    float: right;
+    /*float: left;*/
+    /*left: 100%;*/
+    /*left: 50px*/
+    /*right: 0px;*/
+    line-height: 1em;
+}
+ol.progtrckr li.progtrckr-done:before {
+    content: "\2713";
+    color: white;
+    background-color: yellowgreen;
+    height: 2.2em;
+    width: 2.2em;
+    line-height: 2.2em;
+    border: none;
+    border-radius: 2.2em;
+}
+ol.progtrckr li.progtrckr-todo:before {
+    content: "\039F";
+    color: silver;
+    background-color: white;
+    font-size: 2.2em;
+    bottom: -1.2em;
+}
+
+.modal.modal-wide .modal-dialog {
+  width: 90%;
+}
+
+.modal-wide .modal-body {
+  overflow-y: auto;
+  min-height: 350px;
+}
+
+.editrowCss{
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.editrowCss:hover{
+    color: #337337;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.centerAlignDiv{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.centerAlignDiv table{
+    margin: 0 auto;
+}
+
+#viewMoreTable tbody th, #viewMoreTable tbody td{
+    padding: 2px 5px !important;
+}
+
+#viewMoreTable tbody tr:hover{
+    cursor: pointer;
+}
+
+.marginLeft10{
+    margin-left: 10% !important;
+}
+
+.alertAndFeedBackSpan i:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#loaderModal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spinModal 2s linear infinite;
+  animation: spinModal 2s linear infinite;
+}
+
+@-webkit-keyframes spinModal {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spinModal {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/*logs table*/
+
+.LogsTable,.LogsTable_header{
+  width: 100% !important
+}
+
+.modal-contentLogs{
+  min-height: 600px !important;
+}
+
+.modal-bodyLogs{
+  min-height: 500px !important; 
+}

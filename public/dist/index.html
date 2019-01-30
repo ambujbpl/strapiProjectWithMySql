@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>Track Your Shipment</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<link rel="icon" href="http://skf.com/favicon.ico">
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+
+	<script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+	<div id="loadDashboard"></div>
+</body>	
+<script>
+    var searchObj = {
+        "originCity":"initial",
+        "invoiceNumber":"",
+        "LRNumber":"",
+        "from":"",
+        "to":"",
+        "selectStatus":"",
+        "customerNumber":"",
+    }
+    localStorage.setItem('searchObj', JSON.stringify(searchObj));
+    var objSorting = {
+        "sortType":"initial",
+        "name":"",
+        "userId":"",
+        "getColomnIndex":"",
+    }
+    localStorage.setItem('objSorting', JSON.stringify(objSorting));
+    location.replace("./dashboard");
+// $.ajax({
+//     url: '/isAuthonticated',
+//     type: 'POST',
+//     datatype: "json",
+//     async: true,
+//     success: function(res) {
+//         console.log("resCode : ",res);
+//         if(res.resCode === "Ok"){
+//         localStorage.setItem("userId", res.user.sub)
+//         localStorage.setItem("username", res.user.username)
+//         var userId = localStorage.getItem("userId");        
+//         sessionStorage.removeItem('newAttempt');
+//         // console.log("userId>>>>>>---------", userId);
+//         location.replace("./dashboard");  
+//         }else{
+//             // window.localStorage.removeItem("savedGuid")
+//             location.replace("./login");
+//             // location ="/login"    
+//         }
+        
+//     },
+//     error: function(err) {
+//         location.replace("./login");
+//     }
+// });
+</script>
+</body>
+</html>

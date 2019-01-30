@@ -1,0 +1,111 @@
+<style type="text/css">
+.modal-bodyLogs {
+    min-height: 100px !important;
+}
+.modal-contentLogs {
+    min-height: 200px !important;
+}
+</style>
+<div class="centerAlignDiv">
+	<table id='table-logs' class='LogsTable table table-striped table-bordered display hide'  cellspacing=0 width=100%><thead class='Table_header LogsTable_header'><tr><th style='text-align: center;'>File Name</th><th style='text-align: center;'>Date</th><th style='text-align: center;'>User Name</th><th style='text-align: center;'>User Id</th><th style='text-align: center;'>File Type</th></tr></thead><tbody class='LogsTable_body'></tbody></table>
+    <div class="row">
+        <div class="col-md-6">            
+            Export All<input type="radio" name="imgsel" value="" checked="false" />
+        </div>
+        <div class="col-md-6">
+            Export Selected <input type="radio" name="imgsel" value="" checked="false" />
+            <div class="btn-group">
+                <button class="btn btn-primary dropdown-toggle disabled" data-toggle="dropdown">Select <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>    
+    
+</div>
+<script type="text/javascript">
+    // $('.centerAlignDiv').html(" ");
+    var data = {};
+    $.ajax({
+        url: '/route/logs',
+        type: 'POST',
+        datatype: "json",
+        data: data,
+        async: true,
+        success: function(res) {;
+            if (res.resCode == 'OK') {
+                updateLogsBodyFun(res.logs);
+            } else {
+                var track = '<br>' + res.msg + '<br>';
+                $('.loaderModal').addClass('hide');
+                $('#modalBodyLogs').removeClass('hide');
+            }
+        },
+        error: function(err) {
+            console.log("Error executing AJAX request. Please contact your administrator");
+        }
+    });
+
+    function updateLogsBodyFun(data){
+    // sort by id
+    data.sort(function (a, b) {
+      return  b.id - a.id;
+    });
+    // $('.centerAlignDiv').html(" ");
+    // $('.centerAlignDiv').html("<table id='table-logs' class='LogsTable'  cellspacing=0 width=100%><thead class='Table_header LogsTable_header'><tr><th style='text-align: center;'>File Name</th><th style='text-align: center;'>Date</th><th style='text-align: center;'>User Name</th><th style='text-align: center;'>User Id</th><th style='text-align: center;'>File Type</th></tr></thead><tbody class='LogsTable_body'></tbody></table>");
+    $.each(data, function(i, arr) {
+        var body = "<tr>";
+            body += "<td style='text-align: center;' onclick='downloadFile(\"" + arr.fileName + "\",\"" + arr.originalName + "\");' class='editrowCss'>" + arr.originalName + "</td>";//<a href='./../../../" + arr.fileName +"' data-initialized='true' target='_blank' class='editrowCss'></a> 
+            body += "<td style='text-align: center;'>" + moment(arr.createdDate).utc().format("DD-MM-YYYY hh:mm:ss") + "</td>";
+            body += "<td style='text-align: center;'>" + arr.userName + "</td>";
+            body += "<td style='text-align: center;'>" + arr.userId + "</td>";
+            body += "<td style='text-align: center;'>" + arr.fileType + "</td>";        
+            body += "</tr>";
+        $("#table-logs tbody").append(body);
+    });
+    // var table = $('#table-logs').DataTable({
+    //     // scrollY:        '50vh',
+    //     // scrollCollapse: true,
+    //     paging:         true,
+    //     "aaSorting": [],
+    // });
+    setTimeout(function(){ 
+        // table.columns.adjust().draw();
+        $('.loaderModal').addClass('hide');
+        $('#modalBodyLogs').removeClass('hide');
+    }, 1000);
+    // $("#table-logs").css({"width":"100%"});   
+    // table.columns.adjust().draw();
+    // $(".dataTables_scrollHeadInner").css({"width":"100%"});
+    }
+    function downloadFile(path,name){
+    //     var data = {"path":path,"name":name};
+    //     $.ajax({
+    //         url: '/route/downloadFile',
+    //         type: 'POST',
+    //         datatype: "json",
+    //         data: data,
+    //         async: true,
+    //         success: function(res) {;
+    //             if (res.resCode == 'Error') {
+    //                 // var track = '<br>' + res.msg + '<br>';
+    //                 // $('.loaderModal').addClass('hide');
+    //                 // $('#modalBodyLogs').removeClass('hide');
+    //                 // updateLogsBodyFun(res.logs);
+    //             } else {
+    //                 window.open(res, '_blank');
+    //             }
+    //         },
+    //         error: function(res) {
+    //             // console.log("Error executing AJAX request. Please contact your administrator");
+    //             window.open(res, '_blank');
+    //         }
+    //     });
+        window.open('/route/downloadFile?path='+path);        
+    }
+</script>

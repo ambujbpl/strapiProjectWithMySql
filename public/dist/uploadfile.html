@@ -1,0 +1,381 @@
+<!-- <style type="text/css">
+  /* The MIT License */
+.dropzone,
+.dropzone *,
+.dropzone-previews,
+.dropzone-previews * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dropzone {
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(0,0,0,0.02);
+  padding: 1em;
+}
+.dropzone.dz-clickable {
+  cursor: pointer;
+}
+.dropzone.dz-clickable .dz-message,
+.dropzone.dz-clickable .dz-message span {
+  cursor: pointer;
+}
+.dropzone.dz-clickable * {
+  cursor: default;
+}
+.dropzone .dz-message {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.dropzone.dz-drag-hover {
+  border-color: rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.04);
+}
+.dropzone.dz-started .dz-message {
+  display: none;
+}
+.dropzone .dz-preview,
+.dropzone-previews .dz-preview {
+  background: rgba(255,255,255,0.8);
+  position: relative;
+  display: inline-block;
+  margin: 17px;
+  vertical-align: top;
+  border: 1px solid #acacac;
+  padding: 6px 6px 6px 6px;
+}
+.dropzone .dz-preview.dz-file-preview [data-dz-thumbnail],
+.dropzone-previews .dz-preview.dz-file-preview [data-dz-thumbnail] {
+  display: none;
+}
+.dropzone .dz-preview .dz-details,
+.dropzone-previews .dz-preview .dz-details {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  background: #ebebeb;
+  padding: 5px;
+  margin-bottom: 22px;
+}
+.dropzone .dz-preview .dz-details .dz-filename,
+.dropzone-previews .dz-preview .dz-details .dz-filename {
+  overflow: hidden;
+  height: 100%;
+}
+.dropzone .dz-preview .dz-details img,
+.dropzone-previews .dz-preview .dz-details img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+.dropzone .dz-preview .dz-details .dz-size,
+.dropzone-previews .dz-preview .dz-details .dz-size {
+  position: absolute;
+  bottom: -28px;
+  left: 3px;
+  height: 28px;
+  line-height: 28px;
+}
+.dropzone .dz-preview.dz-error .dz-error-mark,
+.dropzone-previews .dz-preview.dz-error .dz-error-mark {
+  display: block;
+}
+.dropzone .dz-preview.dz-success .dz-success-mark,
+.dropzone-previews .dz-preview.dz-success .dz-success-mark {
+  display: block;
+}
+.dropzone .dz-preview:hover .dz-details img,
+.dropzone-previews .dz-preview:hover .dz-details img {
+  display: none;
+}
+.dropzone .dz-preview .dz-success-mark,
+.dropzone-previews .dz-preview .dz-success-mark,
+.dropzone .dz-preview .dz-error-mark,
+.dropzone-previews .dz-preview .dz-error-mark {
+  display: none;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
+  text-align: center;
+  right: -10px;
+  top: -10px;
+}
+.dropzone .dz-preview .dz-success-mark,
+.dropzone-previews .dz-preview .dz-success-mark {
+  color: #8cc657;
+}
+.dropzone .dz-preview .dz-error-mark,
+.dropzone-previews .dz-preview .dz-error-mark {
+  color: #ee162d;
+}
+.dropzone .dz-preview .dz-progress,
+.dropzone-previews .dz-preview .dz-progress {
+  position: absolute;
+  top: 100px;
+  left: 6px;
+  right: 6px;
+  height: 6px;
+  background: #d7d7d7;
+  display: none;
+}
+.dropzone .dz-preview .dz-progress .dz-upload,
+.dropzone-previews .dz-preview .dz-progress .dz-upload {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  background-color: #8cc657;
+}
+.dropzone .dz-preview.dz-processing .dz-progress,
+.dropzone-previews .dz-preview.dz-processing .dz-progress {
+  display: block;
+}
+.dropzone .dz-preview .dz-error-message,
+.dropzone-previews .dz-preview .dz-error-message {
+  display: none;
+  position: absolute;
+  top: -5px;
+  left: -20px;
+  background: rgba(245,245,245,0.8);
+  padding: 8px 10px;
+  color: #800;
+  min-width: 140px;
+  max-width: 500px;
+  z-index: 500;
+}
+.dropzone .dz-preview:hover.dz-error .dz-error-message,
+.dropzone-previews .dz-preview:hover.dz-error .dz-error-message {
+  display: block;
+}
+</style>
+<script src="./dropzone.js"></script>
+
+ <form action="UploadImages"
+     class="dropzone"
+   id="my-awesome-dropzone" enctype="multipart/form-data">
+  </form>
+
+<script type="text/javascript">
+    Dropzone.options.myAwesomeDropzone = {
+            paramName: "file",
+            maxFilesize: 10,
+            url: 'UploadImages',
+            previewsContainer: "#dropzone-previews",
+            uploadMultiple: true,
+            parallelUploads: 5,
+            maxFiles: 20,
+            init: function() {
+                var cd;
+                this.on("success", function(file, response) {
+                    $('.dz-progress').hide();
+                    $('.dz-size').hide();
+                    $('.dz-error-mark').hide();
+                    console.log(response);
+                    console.log(file);
+                    cd = response;
+                });
+                this.on("addedfile", function(file) {
+                    var removeButton = Dropzone.createElement("<a href=\"#\">Remove file</a>");
+                    var _this = this;
+                    removeButton.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        _this.removeFile(file);
+                        var name = "largeFileName=" + cd.pi.largePicPath + "&smallFileName=" + cd.pi.smallPicPath;
+                        $.ajax({
+                            type: 'POST',
+                            url: 'DeleteImage',
+                            data: name,
+                            dataType: 'json'
+                        });
+                    });
+                    file.previewElement.appendChild(removeButton);
+                });
+            }
+        };
+</script>        
+
+<link rel="stylesheet" type="text/css" href="./dropzone/dropzone.css">
+<script src="./dropzone/dropzone.js"></script>
+<form action="/csvfileupload" class="dropzone">
+  <div class="fallback">
+    <input name="file" type="file" accept=".xlsx, .xls" />
+  </div>
+</form>
+<script type="text/javascript">
+$(function(){
+  Dropzone.options.myAwesomeDropzone = {
+    maxFilesize: 5,
+    addRemoveLinks: true,
+    dictResponseError: 'Server not Configured',
+    acceptedFiles: ".xlsx, .xls",
+    init:function(){
+      var self = this;
+      // config
+      self.options.addRemoveLinks = true;
+      self.options.dictRemoveFile = "Delete";
+      //New file added
+      self.on("addedfile", function (file) {
+        console.log('new file added ', file);
+      });
+      // Send file starts
+      self.on("sending", function (file) {
+        console.log('upload started', file);
+        $('.meter').show();
+      });
+      
+      // File upload Progress
+      self.on("totaluploadprogress", function (progress) {
+        console.log("progress ", progress);
+        $('.roller').width(progress + '%');
+      });
+
+      self.on("queuecomplete", function (progress) {
+        $('.meter').delay(999).slideUp(999);
+      });
+      
+      // On removing file
+      self.on("removedfile", function (file) {
+        console.log(file);
+      });
+    }
+  };
+})
+</script> -->
+
+
+
+
+<!--   <script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+<input name="file" type="file" id="comLogo" accept=".xlsx, .xls, .csv" /> 
+<br><br>
+<button class="btn btn-primary" type="submit" value="Submit" onclick="uploadAttandance()">Submit and Add Your file</button>
+   <script type="text/javascript">
+               var oFileIn;
+      oFileIn = document.getElementById('comLogo');
+    if(oFileIn.addEventListener) {
+        oFileIn.addEventListener('change', filePicked, false);
+    };
+
+          function filePicked(oEvent) {
+// Get The File From The Input
+var oFile = oEvent.target.files[0];
+var sFilename = oFile.name;
+// Create A File Reader HTML5
+var reader = new FileReader();
+
+}
+    // working code for send excell-sheet
+  function checkfile(sender) {
+    console.log("sender", sender);
+    var validExts = new Array(".xlsx", ".xls", '.csv');
+    // var fileExt = sender.value;
+    var fileExt = sender;
+    fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+    if (validExts.indexOf(fileExt) < 0) {
+      // alert("Invalid file selected, valid files are of " +
+      //          validExts.toString() + " types.");
+      // swal({
+      //   title: "Cancelled",
+      //   text: "Invalid file selected, valid files are of " + validExts.toString() + " types.",
+      //   type: "error"
+      // });
+      return false;
+    } else return true;
+  };
+
+
+  function uploadAttandance() {
+    var file = document.getElementById('comLogo').files[0];
+    console.log(file);
+    if (file != undefined) {
+      var check = checkfile(file.name);
+      var date = "test";
+      if (date) {
+        console.log(date);
+        var fd = new FormData();
+        fd.append('Attendance', $('#comLogo')[0].files[0]);
+            // var data = null;
+            // var file = $('#comLogo')[0].files[0];
+            // var reader = new FileReader();
+            // var file1 = reader.readAsText(file);
+            // console.log("file1>>>>>>>>>>>",file1);
+            // reader.onload = function(event) {
+            //     var csvData = event.target.result;
+            //     data = $.xlsx.toArrays(csvData);
+            //     if (data && data.length > 0) {
+            //       alert('Imported -' + data.length + '- rows successfully!');
+            //     } else {
+            //         alert('No data to import!');
+            //     }
+            // };
+            // reader.onerror = function() {
+            //     alert('Unable to read ' + file.fileName);
+            // };
+        console.log("fd>>>>>>>", fd);
+        if (check) {
+          $.ajax({
+            url: '/csvfileupload',
+            // url: '/upload',
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            beforeSend: function(xhr) {
+              xhr.setRequestHeader('X-access-Token', date);
+            },
+            success: function(data) {
+              console.log(data);
+              if(data.resCode === "Error"){
+                // swal({
+                //   title: "Cancelled",
+                //   text: data.msg,
+                //   type: "error"
+                // });
+              }
+              else{
+              // swal({
+              //     title: "OK!",
+              //     text: "Update Successfully",
+              //     type: "success"
+              //   },
+              //   function() {
+              //     swal.close();
+              //     window.location.href = './login.html';
+              //   });
+              }
+            }
+          });
+        } else {
+          console.log("check======false");
+        }
+      } else {
+        // swal({
+        //   title: "Cancelled",
+        //   text: "Please enter The Attendance Date!",
+        //   type: "error"
+        // });
+      }
+    } else {
+      // swal({
+      //   title: "Cancelled",
+      //   text: "Please select Attendance Sheet!",
+      //   type: "error"
+      // });
+    }
+  };
+   </script> -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+<form action="/csvfileupload" class="dropzone" enctype="multipart/form-data">
+  <div class="fallback">
+    <input name="displayImage" type="file" multiple />
+  </div>
+</form>>

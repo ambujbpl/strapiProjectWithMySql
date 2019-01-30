@@ -1,0 +1,76 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/nois",
+      "handler": "Nois.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/nois/count",
+      "handler": "Nois.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/nois/:id",
+      "handler": "Nois.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/nois",
+      "handler": "Nois.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/nois/:id",
+      "handler": "Nois.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/nois/:id",
+      "handler": "Nois.destroy",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/nois/:id/relationships/:relation",
+      "handler": "Nois.createRelation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/nois/:id/relationships/:relation",
+      "handler": "Nois.updateRelation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/nois/:id/relationships/:relation",
+      "handler": "Nois.destroyRelation",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

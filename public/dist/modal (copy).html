@@ -1,0 +1,74 @@
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>-->
+<script src="assets/js/jquery.form.min.js"></script>
+
+<div class="alert alert-danger m-b-0">
+    <h4><i class="fa fa-info-circle"></i> Alert Header</h4>
+    <p>Upload your Excell file (It will support .csv, .xls or .xlsx extention only).</p>
+</div><br>
+<div>
+    <form id="uploadForm" enctype="multipart/form-data" action="/csvfileupload" method="post" accept=".xlsx, .xls, .csv">
+        <span class="btn btn-success fileinput-button">
+            <i class="fa fa-plus"></i>
+            <span>Add files...</span>
+            <input type="file" name="userPhoto" id="userPhoto" onchange="loadFile(event)" />
+        </span>
+        <button type="submit" class="btn btn-primary start" value="Upload Image" name="submit">
+            <i class="fa fa-upload"></i>
+            <span>Start upload</span>
+        </button>
+        <span id="status"></span>
+    </form>
+</div>
+<script type="text/javascript">
+    console.log("Upload.js file loaded");
+    $('#uploadForm').submit(function() {
+        var file = document.getElementById('userPhoto').files[0];
+        // console.log("file",file);  
+        // $("#status").empty().text(file.name);      
+        var check = checkfile(file.name);
+        console.log("check", check);
+        if (check) {
+            $("#status").empty().text("File is uploading...");
+
+            $(this).ajaxSubmit({
+
+                error: function(xhr) {
+                    status('Error: ' + xhr.status);
+                },
+
+                success: function(response) {
+                    console.log(response)
+                    $("#status").empty().text(response);
+                }
+            });
+        } else {
+            $("#status").empty().text("Please select valid File...");
+        }
+        return false;
+    });
+
+    // working code for send excell-sheet
+    function checkfile(sender) {
+        console.log("sender", sender);
+        var validExts = new Array(".xlsx", ".xls", '.csv');
+        // var fileExt = sender.value;
+        var fileExt = sender;
+        fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+        if (validExts.indexOf(fileExt) < 0) {
+            // alert("Invalid file selected, valid files are of " +
+            //          validExts.toString() + " types.");
+            // swal({
+            //   title: "Cancelled",
+            //   text: "Invalid file selected, valid files are of " + validExts.toString() + " types.",
+            //   type: "error"
+            // });
+            return false;
+        } else return true;
+    };
+    var loadFile = function(event) {
+        var file = document.getElementById('userPhoto').files[0];
+        console.log("file", file);
+        $("#status").empty().text(file.name);
+    };
+</script>

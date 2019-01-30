@@ -1,0 +1,21 @@
+{
+  "connection": "default",
+  "collectionName": "nois",
+  "info": {
+    "name": "nois",
+    "description": "Register of Nois"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "comment": ""
+  },
+  "attributes": {
+    "NoisRef": {
+      "default": "",
+      "type": "integer",
+      "unique": true,
+      "max": 9
+    }
+  }
+}

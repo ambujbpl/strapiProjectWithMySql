@@ -6,8 +6,8 @@
     "description": "Table of Student"
   },
   "options": {
-    "increments": true,
-    "timestamps": true,
+    "increments": false,
+    "timestamps": false,
     "comment": ""
   },
   "attributes": {

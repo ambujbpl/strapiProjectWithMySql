@@ -1,0 +1,5 @@
+-----------------:update List when data table colomn change:----------------
+
+
+(1)Notification tr elements.
+(2)getColomnIndexFunction. which is return index of colomn name.

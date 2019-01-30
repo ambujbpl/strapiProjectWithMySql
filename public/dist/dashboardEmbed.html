@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Track Your Shipment</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <link rel="icon" href="http://skf.com/favicon.ico">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/animate.min.css" rel="stylesheet" />
+    <link href="assets/css/styleEmbed.css" rel="stylesheet" />
+    <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+    <link href="assets/css/theme/default.css" rel="stylesheet" id="theme" />
+    <link href="assets/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet">
+    <!-- ================== END BASE CSS STYLE ================== -->
+
+    <!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
+    <link href="assets/plugins/jquery-jvectormap/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap-calendar/css/bootstrap_calendar.css" rel="stylesheet" />
+    <!--Begin Form Plugin -->
+    <link href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="assets/plugins/ionRangeSlider/css/ion.rangeSlider.css" rel="stylesheet" />
+    <link href="assets/plugins/ionRangeSlider/css/ion.rangeSlider.skinNice.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap-combobox/css/bootstrap-combobox.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap-eonasdan-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css" rel="stylesheet" />
+    <link href="assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet" />
+    <link href="assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet" />
+    <link href="assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet" />
+    <!-- End Form Plugin -->
+    <!-- Begin Data Table -->
+    <link href="assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/AutoFill/css/autoFill.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/ColReorder/css/colReorder.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/KeyTable/css/keyTable.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/RowReorder/css/rowReorder.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Select/css/select.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/style_track.css" rel="stylesheet" />
+    <!-- End Data Table -->
+    <!-- ================== END PAGE LEVEL CSS STYLE ================== -->
+
+    <!-- ================== BEGIN BASE JS ================== -->
+    <!-- <script src="assets/plugins/pace/pace.min.js"></script> -->
+    <!-- ================== END BASE JS ================== -->
+
+</head>
+
+<body>
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+
+    <!-- begin #page-container -->
+    <div id="page-container" class="page-sidebar-fixed page-header-fixed">
+
+        <!-- begin #content -->
+        <!--<div id="content" class="content">-->
+        <div id="content" style="padding-left: 1%; padding-right: 1%">
+            <!-- begin page-header -->
+            <h1 class="page-header" style="padding-left: 40%"></h1>
+            <!-- end page-header -->
+            <!-- begin row -->
+            <div class="row">
+                <!-- begin col-3 col-md-offset-1-->
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget widget-stats bg-blue">
+                        <div class="stats-icon stats-icon-lg"><i class="fa fa-shopping-cart fa-fw"></i></div>
+                        <div class="stats-title">TOTAL SHIPMENTS</div>
+                        <div class="stats-number" id="totalShipment">0</div>
+                    </div>
+                </div>
+                <!-- end col-3 -->
+                <!-- begin col-3 -->
+                <div class="col-md-2  col-sm-6">
+                    <div class="widget widget-stats bg-blue">
+                        <div class="stats-icon stats-icon-lg"><i class="fa fa-truck fa-fw"></i></div>
+                        <div class="stats-title">IN TRANSIT</div>
+                        <div class="stats-number" id="inTransitShipment">0</div>
+                    </div>
+                </div>
+                <!-- end col-3 -->
+                <!-- begin col-3 -->
+                <div class="col-md-2  col-sm-6">
+                    <div class="widget widget-stats bg-blue">
+                        <div class="stats-icon stats-icon-lg"><i class="fa fa-check fa-fw"></i></div>
+                        <div class="stats-title">DELIVERED</div>
+                        <div class="stats-number" id="deliveredShipment">0</div>
+                    </div>
+                </div>
+                <!-- end col-3 -->
+                <!-- begin col-3 -->
+                <div class="col-md-2  col-sm-6">
+                    <div class="widget widget-stats bg-blue">
+                        <div class="stats-icon stats-icon-lg"><i class="fa fa-check fa-fw"></i></div>
+                        <div class="stats-title">ATTEMPTED</div>
+                        <div class="stats-number" id="attemptedShipment">0</div>
+                    </div>
+                </div>
+                <!-- end col-3 -->
+                <!-- begin col-3 -->
+                <div class="col-md-3  col-sm-6">
+                    <div class="widget widget-stats bg-blue">
+                        <div class="stats-icon stats-icon-lg"><i class="fa fa-bell-o fa-fw"></i></div>
+                        <div class="stats-title">TRANSIT/DELAYED</div>
+                        <div class="stats-number" id="delayedShipment">0</div>
+                    </div>
+                </div>
+                <!-- end col-3 -->
+            </div>
+            <!-- end row -->
+            <!-- begin row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- begin panel -->
+                    <div class="panel panel-inverse" data-sortable-id="form-plugins-1">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="panel-heading" style="background: none">
+                                    <h4 style="color: #348fe2 !important">Search Shipments</h4>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-8"> -->
+                            <!--<div class="panel-body panel-form">-->
+                            <form class="form-horizontal form-bordered">
+                                <div class="form-group">
+                                    <!-- <div class="col-md-6" style="border: none;"> -->
+                                    <div class="col-md-1" style="border: none;">
+                                        <input type="text" class="form-control" placeholder="Invoice No" id="invoiceNumber" />
+                                    </div>
+                                    <div class="col-md-1" style="border: none;">
+                                        <input type="text" class="form-control" placeholder="LR No" id="LRNumber" />
+                                    </div>
+                                    <div class="col-md-1" style="border: none;">
+                                        <select class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" id="selectStatus">
+                                            <option value="" selected>Status</option>
+                                            <!-- <option value="NEW">New</option> -->
+                                            <option value="IN TRANSIT">In Transit</option>
+                                            <option value="DELIVERED">Delivered</option>
+                                            <!-- <option value="OUT FOR DELIVERY">Out For Delivery</option> -->
+                                            <option value="ATTEMPTED">Attempted</option>
+                                            <option value="DELAYED">Delayed</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1" style="border: none;">
+                                        <input type="text" class="form-control" placeholder="Origin" id="originCity" />
+                                    </div>
+                                    <!-- </div> -->
+                                    <!-- <div class="col-md-6" style="border: none;"> -->
+                                    <div class="col-md-2" style="border: none;">
+                                        <!-- <input type="text" class="form-control" id="datepicker-autoCloseFrom" placeholder="From" /> -->
+                                        <div class="input-group" id="default-daterangeEstimated" style="width: : 100%;">
+                                            <input type="text" name="default-daterange" class="form-control" value="" placeholder="Estimated Date" id="dateRangepicker-Estimated" style="width: 100%;"/>
+                                            <!-- <span class="input-group-btn">
+													<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+												</span> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="border: none;">
+                                        <!-- <input type="text" class="form-control" id="datepicker-autoCloseTo" placeholder="To"/> -->
+                                        <div class="input-group" id="default-daterangeDispatch" style="width: : 100%;">
+                                            <input type="text" name="default-daterange" class="form-control" value="" placeholder="Placed Date" id="dateRangepicker-Dispatch" style="width: : 100%;" />
+                                            <!-- <span class="input-group-btn">
+													<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+												</span> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 customerNumberSearchDiv hide" style="border: none;">
+                                        <input type="text" class="form-control" id="customerNumber" placeholder="Customer No" />
+                                    </div>
+                                    <div class="col-md-1" style="border: none;">
+                                        <button type="submit" class="btn btn-sm btn-primary m-r-5" onClick="searchFunction(); return false;">Search</button>
+                                    	<a class="hide" name="Filter" value="Filter" id="Filter" style="font-size: 10px;" onclick="removeFilterFunction()"><span class='editrowCss'>Remove Filter</span></a>
+                                    </div>
+                                    <!-- </div> -->
+                                </div>
+                            </form>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+            <!-- begin row -->
+            <div class="row">
+                <!-- begin col-12 -->
+                <div class="col-md-12">
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                            </div>
+                            <h4 class="panel-title">Shipment Status</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div id="tablecontainerDiv"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end row -->
+
+            <!-- #modal-alert -->
+            <div class="modal fade" id="modal-alert">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">MIS Upload</h4>
+                        </div>
+                        <div class="modal-body" id="modalBody">
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #modal-alert closed-->
+
+            <!-- #modal-alert -->
+            <div class="modal fade" id="modal-alert-idc">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">IDC file Upload</h4>
+                        </div>
+                        <div class="modal-body" id="modalBodyIdc">
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #modal-alert closed-->
+
+            <!-- #modal-Report -->
+            <div class="modal fade modal-wide" id="modal-report">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="exampleModalLongTitle" style="text-align: center;"></h4>
+                        </div>                       
+                        <div class="modal-body">
+                            <div id="loaderModal"></div>
+                            <div class="hide" id="modalBodyReport"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #modal-Report closed-->
+
+            <!-- begin scroll to top btn -->
+            <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+            <!-- end scroll to top btn -->
+        </div>
+    </div>
+    <!-- end page container -->
+
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+    <script src="assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+		<script src="assets/crossbrowserjs/html5shiv.js"></script>
+		<script src="assets/crossbrowserjs/respond.min.js"></script>
+		<script src="assets/crossbrowserjs/excanvas.min.js"></script>
+	<![endif]-->
+    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+    <!-- ================== END BASE JS ================== -->
+
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="assets/plugins/jquery-jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="assets/plugins/jquery-jvectormap/jquery-jvectormap-world-merc-en.js"></script>
+    <!-- Begin Form Plugins -->
+    <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
+    <script src="assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
+
+    <script src="assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="assets/plugins/bootstrap-daterangepicker/moment.js"></script>
+    <script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="assets/plugins/select2/dist/js/select2.min.js"></script>
+    <script src="assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js"></script>
+    <script src="assets/js/form-plugins.demo.min.js"></script>
+
+    <!-- End Form Plugins -->
+    <!-- Begin Data Table -->
+    <script src="assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
+    <script src="assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/Buttons/js/buttons.flash.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/Buttons/js/jszip.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/Buttons/js/pdfmake.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/Buttons/js/vfs_fonts.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/Buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/Buttons/js/buttons.print.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/AutoFill/js/dataTables.autoFill.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/ColReorder/js/dataTables.colReorder.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/KeyTable/js/dataTables.keyTable.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/RowReorder/js/dataTables.rowReorder.min.js"></script>
+    <script src="assets/plugins/DataTables/extensions/Select/js/dataTables.select.min.js"></script>
+    <!-- Data-table initial  -->
+    <script src="assets/js/table-manage-combine.demo.min.js"></script>
+    <!-- <script src="assets/js/table-manage-scroller.demo.min.js"></script> -->
+
+    <!-- End Data Table -->
+    <script src="assets/js/apps.min.js"></script>
+    <script src="assets/js/dashboardEmbed.min.js"></script>
+    <!-- <script src="./dashboardEmbed.js"></script> -->
+    <!-- ================== END PAGE LEVEL JS ================== -->
+
+    <script>
+        $(document).ready(function() {
+            App.init();
+            FormPlugins.init();
+        });
+    </script>
+</body>
+
+</html>

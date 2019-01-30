@@ -1,0 +1,181 @@
+<div class="centerAlignDiv">
+	<table id='table-users' class='LogsTable table table-striped table-bordered display'  cellspacing=0 width=100%><thead class='Table_header LogsTable_header'><tr><th style='text-align: center;'>Name</th><th style='text-align: center;'>Last Name</th><th style='text-align: center;'>Email</th><th style='text-align: center;'>User Name</th><th style='text-align: center;'>User Id</th><th style='text-align: center;'>Role</th><th style='text-align: center;'>Date of Creation</th><th style='text-align: center;'>Status</th></tr></thead><tbody class='LogsTable_body'></tbody></table>
+</div>
+<script type="text/javascript">
+    var table;   
+    var user = JSON.parse(localStorage.getItem('user'));
+    var data =  {"userId": user.user_id,"role": user.role};
+    $.ajax({
+        url: '/route/getUsersList',
+        type: 'POST',
+        datatype: "json",
+        data: data,
+        async: true,
+        success: function(res) {;
+            if (res.resCode == 'OK') {
+                updateUserBodyFun(res.users);
+            } else {
+                var track = '<br>' + res.msg + '<br>';
+                $('.loaderModal').addClass('hide');
+                $('#modalBodyLogs').removeClass('hide');
+            }
+        },
+        error: function(err) {
+            console.log("Error executing AJAX request. Please contact your administrator");
+        }
+    });
+    function updateUserBodyFun(data){
+    // sort by id
+    // data.sort(function (a, b) {
+    //   return  b.id - a.id;
+    // });
+    if(table != undefined){
+        table.destroy();
+        $(".centerAlignDiv").html("<table id='table-users' class='LogsTable table table-striped table-bordered display'  cellspacing=0 width=100%><thead class='Table_header LogsTable_header'><tr><th style='text-align: center;'>Name</th><th style='text-align: center;'>Last Name</th><th style='text-align: center;'>Email</th><th style='text-align: center;'>User Name</th><th style='text-align: center;'>User Id</th><th style='text-align: center;'>Role</th><th style='text-align: center;'>Date of Creation</th><th style='text-align: center;'>Status</th></tr></thead><tbody class='LogsTable_body'></tbody></table>");        
+    }
+    var body = "";
+    $.each(data, function(i, arr) {
+            body = "<tr>";
+            body += "<td style='text-align: center;'>" + arr.name + "</td>";
+            body += "<td style='text-align: center;'>" + arr.lastname + "</td>";
+            body += "<td style='text-align: center;'>" + arr.email + "</td>";
+            body += "<td style='text-align: center;'>" + arr.username + "</td>";
+            body += "<td style='text-align: center;'>" + arr.user_id + "</td>";
+            body += "<td style='text-align: center;'>" + arr.role + "</td>"; 
+            body += "<td style='text-align: center;'>" + moment(arr.create_date).utc().format("DD-MM-YYYY hh:mm:ss") + "</td>";
+            // body += "<td style='text-align: center;' onclick='downloadFile(\"" + arr.status + "\",\"" + arr.status + "\");' class='editrowCss'>" + arr.status + "</td>";
+            // if(arr.status == 1){
+            //     body += "<td style='text-align: center;'><p class='m-b-20'><input type='checkbox' data-render='switchery' class='js-switch' data-theme='default' checked /></p></td>";
+            // }else{
+            //     body += "<td style='text-align: center;'><p class='m-b-20'><input type='checkbox' data-render='switchery' class='js-switch updateUserStatus' data-theme='default'/></p></td>";
+            // }
+            if(arr.status == 1){
+            body += "<td style='text-align: center;'><span class='updateUser alertAndFeedBackSpan' title='Active'><i class='fa fa-user checked'></i></span></td>";
+            } else {
+            body += "<td style='text-align: center;'><span class='updateUser alertAndFeedBackSpan' title='Inactive'><i class='fa fa-user'></i></span></td>";
+            }
+              
+            body += "</tr>";
+        $("#table-users tbody").append(body);
+    });
+    table = $('#table-users').DataTable({
+        // scrollY:        '50vh',
+        // scrollCollapse: true,
+        paging:         true,
+        "aaSorting": [],
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+        iDisplayLength: -1
+    });
+    updateSwitchesFunction(data);
+
+    // var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+
+    // elems.forEach(function(html) {
+    //   var switchery = new Switchery(html);
+    //   html.onchange = function(e) {
+    //        updateSwitchesFunction(obj,e);          
+    //   }
+    // });
+
+    setTimeout(function(){ 
+        table.columns.adjust().draw();
+        $('.loaderModal').addClass('hide');
+        $('#modalBodyUserList').removeClass('hide');
+    }, 1000);
+    $("#table-users").css({"width":"100%"});   
+    table.columns.adjust().draw();
+    // $(".dataTables_scrollHeadInner").css({"width":"100%"});
+    }
+    // var elems = document.querySelectorAll('.switchery');
+    // console.log("elems : ",elems);
+    // elems.forEach(function(el) {                
+        
+    // });
+    // var changeCheckbox = document.querySelector('.js-check-change');
+
+    // changeCheckbox.onchange = function() {
+    //   alert(changeCheckbox.checked);
+    // };
+    // Update updateUserStatus
+    function updateSwitchesFunction(arr){
+        $('.updateUser').click(function(e) {
+            var name = $(this).parents('tr').find('td:first').html();
+            var lastname = $(this).parents('tr').find('td:nth-child(2)').html();
+            var email = $(this).parents('tr').find('td:nth-child(3)').html();
+            var username = $(this).parents('tr').find('td:nth-child(4)').html();
+            var user_id = $(this).parents('tr').find('td:nth-child(5)').html();
+            var role = $(this).parents('tr').find('td:nth-child(6)').html();
+            var create_date = $(this).parents('tr').find('td:nth-child(7)').html();
+            var status = $(this).parents('tr').find('td:nth-child(8)').html();
+            
+            var msg = "User Name :" + name + ", status is going to be \"Active\"";
+            var i;
+            for (i = 0; i < arr.length; i++) {
+                // console.log(arr[i]);
+                if (user_id == arr[i].user_id) {
+                    status = arr[i].status
+                }
+            }
+            console.log("status----",status);
+            // if (notification_No != 1) {
+            if (status != 1) {
+
+            } else {
+                msg = "Are you sure you want to inactive user : " + name + " ?"
+            }
+            if(user_id == 1){
+                alert("Sorry we are not able to change Super Admin status!");
+            }else{
+                var r = confirm(msg);
+            }
+            if (r == true) {
+
+                if (status == null) {
+                    status = 0
+                } else {
+                    // notification_No = null
+                }
+                var user = JSON.parse(localStorage.getItem('user'))
+                var obj = {
+                    "name": name,
+                    "lastname": lastname,
+                    "email": email,
+                    "username": username,
+                    "user_id": user_id,
+                    "role": role,
+                    "create_date": create_date,
+                    "status": status,
+                    "userId": user.user_id,
+                    "role": user.role,
+                };
+                $.ajax({
+                    url: '/route/updateUserStatus',
+                    type: 'POST',
+                    datatype: "json",
+                    data: obj,
+                    async: true,
+                    success: function(res) {
+                        // console.log("resCode : ",res.resCode);
+                        if (res.resCode === 'Ok') {
+                            // console.log("res -----++++++",res);
+                            $('.LogsTable_body').html(" ");
+                            body = "";
+                            $("#table-users tbody").html(" ");
+                            $('.loaderModal').removeClass('hide');
+                            table.destroy();
+                            updateUserBodyFun(res.users);                            
+                        } else {
+                            alert(res.msg);
+                            console.log(res.msg);
+                            setTimeout(function(){ location.replace("./dashboard"); }, 2000);
+                        }
+                    },
+                    error: function(err) {
+                        // alert("err");
+                        console.log("Error executing AJAX request. Please contact your administrator");
+                    }
+                });
+            }            
+        });
+    }
+</script>
